@@ -1,0 +1,110 @@
+﻿@model AppUserProfileDto
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var userImage = (Model.Image != null) ? $"/images/{Model.Image.FileName}" : "/sneat/assets/img/avatars/defaultuser.png";
+
+
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <h5 class="card-header">Profilim</h5>
+            <!-- Account -->
+            <form asp-area="Admin" asp-controller="User" asp-action="Profile" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="@Model.Id" />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="@userImage"
+                             alt="user-avatar"
+                             class="d-block rounded"
+                             height="100"
+                             width="100"
+                             id="uploadedAvatar" />
+                        <div class="button-wrapper">
+                            <label asp-for="FormFile" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Yeni Resim Yükle</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file"
+                                       asp-for="FormFile"
+                                       class="account-file-input"
+                                       accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Reset</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-0" />
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label asp-for="FirstName" class="form-label">Ad</label>
+                            <input class="form-control"
+                                   type="text"
+                                   asp-for="FirstName"
+                                   id="firstName" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label asp-for="LastName" class="form-label">Soyad</label>
+                            <input class="form-control" type="text" asp-for="LastName" id="lastName" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="mb-3 col-md-6">
+                            <label asp-for="Username" class="form-label">Kullanıcı Adı</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="organization"
+                                   asp-for="Username" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="mb-3 col-md-6">
+                            <label asp-for="Email" class="form-label">EMail</label>
+                            <input class="form-control"
+                                   type="email"
+                                   id="email"
+                                   asp-for="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" asp-for="PhoneNumber">Telefon Numarası</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text">TR (+90)</span>
+                                <input type="text"
+                                       id="phoneNumber"
+                                       asp-for="PhoneNumber"
+                                       class="form-control"
+                                       placeholder="555 555 5555" />
+                            </div>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="mt-2">
+                            <button type="reset" class="btn btn-outline-secondary">Vazgeç</button>
+                            <button type="submit" class="btn btn-primary me-2 ">Kaydet</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

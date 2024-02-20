@@ -1,0 +1,40 @@
+﻿@model List<AssignRoleToUserDto>
+@{
+    ViewData["Title"] = "Kullanıcıya Rol Ata";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Rol Yönetimi /</span> Rol Ekle</h4>
+
+<div class="col-md-12 ">
+    <div class="card mb-4">
+        <form asp-area="Admin" asp-controller="Roles" asp-action="AssignRoleToUser" asp-route-userId="@ViewBag.userId" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body">
+                <div class="form-group mb-4">
+
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <div class="input-group mb-2">
+
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" asp-for="@Model[i].Exist" id="check_@Model[i].Name" aria-label="Checkbox for following text input">
+                            </div>
+                            <label class="form-control" for="check_@Model[i].Name">@Model[i].Name</label>
+                            <input type="hidden" asp-for="@Model[i].Name" />
+                            <input type="hidden" asp-for="@Model[i].Id" />
+                        </div>
+                    }
+                </div>
+
+
+                <div class="input-group">
+                    <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn  btn-danger btn-lg col-md-6">Kullanıcı Listesine Dön</a>
+                    <button type="submit" class="btn  btn-success btn-lg col-md-6">Rol Ata</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

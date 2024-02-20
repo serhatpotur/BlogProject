@@ -1,0 +1,59 @@
+﻿@model List<AppUserDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Kullanıcı İşlemleri /</span> Kullanıcılar</h4>
+
+<div class="card">
+
+    <div class="table-responsive text-nowrap m-4">
+        <table class="table" id="usersTable">
+            <thead>
+                <tr>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Email</th>
+                    <th>Email Onaylı mı</th>
+                    <th>Telefon Numarası</th>
+                    <th>Roller</th>
+                    <th>İşlemler</th>
+                </tr>
+
+
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Username</td>
+                        <td>@item.Email</td>
+                        <td>@(item.EmailConfirmed ? "Onaylı" : "Onaylanmadı")</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>
+                            <user-roles-name user-id="@item.Id"></user-roles-name>
+
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" data-id="@item.Id" asp-route-userId="@item.Id" asp-area="Admin" asp-controller="Roles" asp-action="AssignRoleToUser">
+                                <i class='bx bx-user-plus'></i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" data-id="@item.Id" asp-route-userId="@item.Id" asp-area="Admin" asp-controller="User" asp-action="Delete">
+                                <i class="bx bx-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/userIndex.js" type="application/ecmascript"></script>
+}
+

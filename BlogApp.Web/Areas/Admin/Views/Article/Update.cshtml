@@ -1,0 +1,57 @@
+﻿@model UpdateArticleDto
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Makale Yönetimi /</span> Makale Güncelle</h4>
+
+<div class="col-md-12">
+    <div class="card mb-4">
+        <form asp-area="Admin" asp-controller="Article" asp-action="Update" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="form-label">Kategori</label>
+
+                    <select id="categoryList" class="form-control mb-3" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" for="defaultFormControlInput" class="form-label">Başlık</label>
+                    <input type="text"
+                           asp-for="Title"
+                           class="form-control mb-3"
+                           id="defaultFormControlInput"
+                           aria-describedby="defaultFormControlHelp" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content" class="form-label">İçerik</label>
+                    <textarea asp-for="Content" rows="5" class="form-control mb-3"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FormFile" for="defaultFormControlInput" class="form-label">Resim seçiniz</label>
+                    <input asp-for="FormFile" type="file" accept="image/*" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
+                    <span asp-validation-for="FormFile" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <a asp-area="Admin" asp-controller="Article" asp-action="Index" class="btn  btn-danger btn-lg col-md-6">Vazgeç</a>
+                    <button type="submit" class="btn  btn-success btn-lg col-md-6">Güncelle</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

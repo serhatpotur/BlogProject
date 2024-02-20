@@ -1,0 +1,21 @@
+﻿@model List<GetListArticleDto>
+
+<div class="sidebar-item recent-posts">
+    <div class="sidebar-heading">
+        <h2>Son Makaleler</h2>
+    </div>
+    <div class="content">
+        <ul>
+            @foreach (var article in Model)
+            {
+                <li>
+                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@article.Id">
+                        <h5>@article.Title</h5>
+                        <span class="float-end">@article.CreatedBy - @article.CreatedDate.ToShortDateString()</span>
+
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

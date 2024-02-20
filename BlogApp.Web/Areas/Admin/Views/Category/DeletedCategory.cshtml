@@ -1,0 +1,50 @@
+﻿@model List<GetListCategoryDto>
+@{
+    ViewData["Title"] = "DeletedCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Silinmiş Ögeler/</span> Kategoriler</h4>
+
+<div class="card">
+    @* <h5 class="card-header">Table Basic</h5> *@
+    <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="btn btn-primary m-2">
+        <i class="bx bx-plus"></i> Kategori Ekle
+    </a>
+    <div class="table-responsive text-nowrap m-4">
+        <table class="table" id="categoriesTable">
+            <thead>
+                <tr>
+                    <th>Ad</th>
+                    <th>Silinme Tarihi</th>
+                    <th>Silen</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.DeletedDate</td>
+                        <td>@item.DeletedBy</td>
+                        <td>@(item.isDeleted ? "Pasif" : "Aktif")</td>
+                        <td>
+                          @*   <a class="btn btn-danger btn-sm" data-id="@item.Id" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Category" asp-action="Update">
+                                <i class="bx bx-edit"></i>
+                            </a> *@
+                            <a class="btn btn-danger btn-sm" data-id="@item.Id" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Category" asp-action="UndoDelete">
+                                <i class='bx bx-undo'></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/categoryIndex.js" type="application/ecmascript"></script>
+}

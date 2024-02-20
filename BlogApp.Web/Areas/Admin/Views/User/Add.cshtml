@@ -1,0 +1,81 @@
+﻿@model AddAppUserDto
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Kullanıcı Yönetimi /</span> Kullanıcı Ekle</h4>
+
+<div class="col-md-12">
+    <div class="card mb-4">
+        <form asp-area="Admin" asp-controller="User" asp-action="Add" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body">
+                <div class="form-group">
+
+                    <label asp-for="RoleId" class="form-label">Rol</label>
+
+                   @*  <!-- Button trigger modal -->
+                    <a class="btn btn-primary text-white float-end mb-4" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                        Rol Ekle <i class="bx bx-plus-circle"></i>
+                    </a>
+ *@
+                    <select id="roleList" class="form-control mb-3" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
+                    <span asp-validation-for="RoleId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" for="defaultFormControlInput" class="form-label">Ad</label>
+                    <input type="text"
+                           asp-for="FirstName"
+                           class="form-control mb-3"
+                           id="defaultFormControlInput"
+                           aria-describedby="defaultFormControlHelp" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+
+
+                </div>
+                 <div class="form-group">
+                    <label asp-for="LastName" for="defaultFormControlInput" class="form-label">Soyad</label>
+                    <input type="text"
+                           asp-for="LastName"
+                           class="form-control mb-3"
+                           id="defaultFormControlInput"
+                           aria-describedby="defaultFormControlHelp" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+
+
+                </div>
+                 <div class="form-group">
+                    <label asp-for="Email" for="defaultFormControlInput" class="form-label">Email</label>
+                    <input type="email"
+                           asp-for="Email"
+                           class="form-control mb-3"
+                           id="defaultFormControlInput"
+                           aria-describedby="defaultFormControlHelp" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" for="defaultFormControlInput" class="form-label">Teelfon Numarası</label>
+                    <input type="tel"
+                           asp-for="PhoneNumber"
+                           class="form-control mb-3"
+                           id="defaultFormControlInput"
+                           aria-describedby="defaultFormControlHelp" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+
+                </div>
+         
+
+                <div class="form-group row">
+                    <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn  btn-danger btn-lg col-md-6">Vazgeç</a>
+                    <button type="submit" class="btn  btn-success btn-lg col-md-6">Kaydet</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+

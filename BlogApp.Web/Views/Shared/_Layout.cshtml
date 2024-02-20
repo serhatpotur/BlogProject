@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@await Html.PartialAsync("_HeadPartial")
+
+<body>
+
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_NavbarPartial")
+
+    <div class="main-banner header-text">
+        <div class="container-fluid">
+            <div class="owl-banner owl-carousel">
+
+            </div>
+        </div>
+    </div>
+
+
+    @RenderBody()
+
+
+
+    @await Html.PartialAsync("_FooterPartial")
+    @await Html.PartialAsync("_ScriptsPartial")
+
+
+    @await RenderSectionAsync("Scripts", false)
+
+
+</body>
+</html>
